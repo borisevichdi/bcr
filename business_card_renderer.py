@@ -120,6 +120,7 @@ def tracer(G,
                 ) - 0.4  # <--- sphere radius squared
                 root2 = b * b - c2
                 # from the definitions above, it can be shown that b^2 > c2 if and only if the ray intersects the sphere
+                # see the slides 'vectors.pptx' attached if you want to understand this
                 if root2 > 0:
                     camera_sphere_j_k_dist = - b - sqrt(root2)  # distance to the hit point
                     # if this sphere is hit closer than anything that was hit previously
@@ -356,7 +357,8 @@ def prepare_the_world(world_int):
     world_str = [np.binary_repr(x) for x in world_int]
     width = max(len(s) for s in world_str)
     world_str = [np.binary_repr(x, width=width) for x in world_int]
-    world_mask = np.array(list(reversed([list(reversed([bool(int(sym)) for sym in s])) for s in world_str])), dtype=bool)  # replacing with 1D tuple made code 5x slower
+    world_mask = np.array(list(reversed([list(reversed([bool(int(sym)) for sym in s])) for s in world_str])),
+                          dtype=bool)
     mask_rows = len(world_int)
     mask_cols = width
     return world_mask, mask_rows, mask_cols
