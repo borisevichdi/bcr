@@ -1,10 +1,14 @@
 # Business card renderer in python
 
-This code implements the ray casting using python + numba for speed. I described my journey in details here:
-- part 1, intro - https://medium.com/@sibearianpython/the-business-card-raytracer-in-python-8dcc868069f5
-- part 2, animation - ...
+This code implements the ray casting and creates this animation using _python_ + _numba_ for speed.
 
-The original idea is inspired by this post - http://fabiensanglard.net/rayTracing_back_of_business_card/
+![](animation.gif)
+
+I described my journey writing this code in details here:
+- part 1, intro - https://medium.com/@sibearianpython/the-business-card-raytracer-in-python-8dcc868069f5
+- part 2, animation - https://medium.com/@sibearianpython/the-business-card-raytracer-in-python-part-2-58fd490c17f7
+
+The idea to make a ray caster in python is inspired by this post - http://fabiensanglard.net/rayTracing_back_of_business_card/
 
 ## Installation
 TL;DR: To install, create a new virtual environment and install the required dependencies by calling:
@@ -32,6 +36,5 @@ By default, only 10 frames will be rendered to spare you waiting time.
 You can change it on top of the script to 120 if you want to see the entire animation.
 
 Note: the window with the animation may not show up on top.
-To close the window with the animation press "Esc".
 
-## Appendix - how does 'tracer' function finds intersection between the ray and a sphere?
+To close the window with the animation press "Esc".

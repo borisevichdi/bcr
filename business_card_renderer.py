@@ -1,9 +1,10 @@
-# This code is downloaded from ...
+# This code is downloaded from https://github.com/borisevichdi/bcr
 # The code implements the ray casting idea from this post - http://fabiensanglard.net/rayTracing_back_of_business_card/
 # using python + numba for speed.
 # See https://medium.com/@sibearianpython/the-business-card-raytracer-in-python-8dcc868069f5 for background,
-# and ... for the story of this code.
-# See supplementary materials in the folder to understand better how 'tracer' works.
+# and https://medium.com/@sibearianpython/the-business-card-raytracer-in-python-part-2-58fd490c17f7
+# for the story of this code.
+# See supplementary presentation in the folder to understand better how 'tracer' works.
 #
 # The code is organized as follows:
 # - imports
@@ -27,9 +28,13 @@ import cv2
 # Describe the world
 G_int = [16128, 49344, 65568, 394256, 525328, 1050632, 1050632, 2099208,
          2101252, 2101252, 2101252, 2105352, 1581064, 270344, 16392, 16400,
-         16400, 16416, 32832, 33152, 33280, 64512, ]
-# How many frames to render - the full circle would be 120 frames as defined inside 'create_frame' function
-FRAMES = 10
+         16400, 16416, 32832, 33152, 33280, 64512, ]  # <-- Change here for your own logo
+# How many frames we want a full rotation to be
+FULL_CIRCLE = 120
+# How many frames out of 'FULL_CIRCLE' to render
+FRAMES = 10  # change to 'FULL_CIRCLE' for the full circle - takes proportionally more time to calculate!
+# How many rays to sample - the more, the better the quality of the final image
+RAYS = 8  # number of rays to cast - use 24 for higher quality image - and 3x waiting time
 
 
 # Here comes the code
@@ -234,7 +239,6 @@ def raycast(G, x: int, y: int, angle_sin: float, angle_cos: float,
     """
     # Defining ray casting parameters
     color = (30., 30., 30.)  # "black" color
-    RAYS = 8  # number of rays to cast - use 24 for higher quality image (and 3x waiting time)
     color_adj = 1 / RAYS / 3
     sampled_colors = []
     for ray_i in range(RAYS):
@@ -302,7 +306,6 @@ def create_frame(G, frame_n: int, xdim: int, ydim: int):
     Returns:
         Bytes of the rendered image in .ppm format.
     """
-    FULL_CIRCLE = 120  # how many frames we want full rotation to be
     # Defining the camera position and orientation
     camera_position = (17., 16., 8.)
     camera_direction = normalize(-6., -16., 0.)  # == (-0.351, -0.936, 0.0)
