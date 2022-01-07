@@ -203,7 +203,7 @@ def sample(G,
     if m == 1:
         # ray hits the floor directly - return the expected color of the floor at the hit coordinate
         # the following 'if' defines the pattern on the floor and its colors
-        if int(ceil(intersection_coord[0]) // 2 + ceil(intersection_coord[1]) // 2) % 4 < 2:
+        if int(ceil(intersection_coord[0]) // 2 + ceil(intersection_coord[1]) // 2) & 1:
             v = (135, 135, 50)
         else:
             v = (235, 235, 235)
